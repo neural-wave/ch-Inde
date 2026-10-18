@@ -1,0 +1,11 @@
+{
+  "params": {
+    "price_threshold": 1.0,
+    "variation_threshold": -1.0,
+    "strength": 1.0,
+    "radius": 1
+  },
+  "protocol": "All original full-data training dates; fixed grid; radius=1",
+  "training_dates_sha256": "07c42a2eda9c27239ec4d9644507fbdb2998478f2831d3f72a927e4e1e9b0654",
+  "source_gate_sha256": "68227255c29bd5e258709f2a0370dd07c1bbe9cebcbbf855ecd2b9df79121fc8"
+}

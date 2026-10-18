@@ -1,0 +1,22 @@
+# Dependencies of the delivery (inference and the full-data training refit).
+#
+# Requires Python >= 3.12 (the shipped checkpoints and the training code were produced with
+# 3.13.7). On macOS the system `python3` is 3.9.6 and will NOT work; create the environment with
+# an explicit interpreter:
+#
+#   python3.13 -m venv .venv
+#   source .venv/bin/activate
+#   python -m pip install --upgrade pip
+#   python -m pip install -r requirements.txt
+#
+# CPU is enough for inference (two small models). Training runs on CPU or a single GPU.
+# scikit-learn is required because the retrieval context module imports the team's classical
+# feature helpers at module level; pyyaml and jsonargparse are used by the training CLI.
+numpy>=2.0,<3
+pandas>=2.2,<4
+torch>=2.5,<3
+lightning>=2.5,<3
+scipy>=1.13,<2
+scikit-learn>=1.5,<2
+pyyaml>=6
+jsonargparse[signatures]>=4.27,<5

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aet-neural-wave-quarter-hour-delivery"
+version = "1.1.0"
+description = "Hourly-to-quarter-hourly electricity price reconstruction: full-data 50/50 ensemble (A0 R3-CNN + B2 original), inference and training refit"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.0,<3",
+    "pandas>=2.2,<4",
+    "torch>=2.5,<3",
+    "lightning>=2.5,<3",
+    "scipy>=1.13,<2",
+    "scikit-learn>=1.5,<2",
+    "pyyaml>=6",
+    "jsonargparse[signatures]>=4.27,<5",
+]
+
+[tool.setuptools.packages.find]
+include = ["src*"]

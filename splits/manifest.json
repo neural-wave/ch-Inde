@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "data_path": "/Users/alessiobarletta/Documents/USI26-27/neuralWave/deliverable/data/train_prices_15min.csv",
+  "data_sha256": "f71ae6dbcca5f04e76e35840e29d064e69ad292f26d8ec7bf013bff2d904f65c",
+  "monthly_scope": "reserve-october",
+  "chronological_min_train_months": 3,
+  "zones": [
+    "ZONE_0",
+    "ZONE_1",
+    "ZONE_2",
+    "ZONE_3"
+  ],
+  "source_dates": 363,
+  "source_rows": 139392,
+  "missing_dates_preserved": [
+    "2025-10-26",
+    "2026-03-29"
+  ],
+  "evaluation": {
+    "metric": "MAE over 96 quarters per date-zone, mean over dates per zone, then equal mean of four zones",
+    "hourly_mean_tolerance_eur_mwh": 0.0001,
+    "standalone_baseline": {
+      "method": "makima",
+      "amplitude": 2.0,
+      "hour_centers": true,
+      "quarter_centers": true,
+      "extrapolate": true,
+      "center_residual_per_hour": true
+    },
+    "report": [
+      "model_mae",
+      "makima_mae",
+      "absolute_improvement=makima_mae-model_mae",
+      "relative_improvement_pct=100*(makima_mae-model_mae)/makima_mae"
+    ],
+    "fold_aggregation": [
+      "per_fold_scores",
+      "equal_month_macro_average",
+      "pooled_date_weighted_equal_zone_MAE"
+    ],
+    "history": "historical features must use strictly earlier dates with explicitly allowed label availability",
+    "zero_baseline_policy": "relative improvement is null when MAKIMA MAE equals zero",
+    "selection": "preprocessing fits train only; gate calibration stays inside training dates; test never tunes",
+    "windows": "whole-date validation/test; any sliding training window must stay within contiguous training dates"
+  },
+  "october_status": "reserved by this protocol; earlier project experiments already used October in training",
+  "all_12_caveat": null,
+  "feature_enrichment": {
+    "enabled": false,
+    "extractor": null,
+    "format": null,
+    "history_policy": null
+  },
+  "folds": [
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2025-11",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2025-11/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2025-12",
+      "train_dates": 302,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2025-12/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-01",
+      "train_dates": 302,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-01/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-02",
+      "train_dates": 305,
+      "validation_dates": 28,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-02/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-03",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-03/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-04",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-04/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-05",
+      "train_dates": 302,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-05/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-06",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-06/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-07",
+      "train_dates": 302,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-07/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-08",
+      "train_dates": 302,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-08/split.json"
+    },
+    {
+      "strategy": "monthly_cv",
+      "fold_id": "holdout-2026-09",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "monthly_cv/holdout-2026-09/split.json"
+    },
+    {
+      "strategy": "october_holdout",
+      "fold_id": "october-2025",
+      "train_dates": 333,
+      "validation_dates": 0,
+      "test_dates": 30,
+      "reserved_dates": 0,
+      "unused_dates": 0,
+      "path": "october_holdout/october-2025/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-01-validate-2026-02",
+      "train_dates": 92,
+      "validation_dates": 28,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 213,
+      "path": "chronological/through-2026-01-validate-2026-02/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-02-validate-2026-03",
+      "train_dates": 120,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 183,
+      "path": "chronological/through-2026-02-validate-2026-03/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-03-validate-2026-04",
+      "train_dates": 150,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 153,
+      "path": "chronological/through-2026-03-validate-2026-04/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-04-validate-2026-05",
+      "train_dates": 180,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 122,
+      "path": "chronological/through-2026-04-validate-2026-05/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-05-validate-2026-06",
+      "train_dates": 211,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 92,
+      "path": "chronological/through-2026-05-validate-2026-06/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-06-validate-2026-07",
+      "train_dates": 241,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 61,
+      "path": "chronological/through-2026-06-validate-2026-07/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-07-validate-2026-08",
+      "train_dates": 272,
+      "validation_dates": 31,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 30,
+      "path": "chronological/through-2026-07-validate-2026-08/split.json"
+    },
+    {
+      "strategy": "chronological",
+      "fold_id": "through-2026-08-validate-2026-09",
+      "train_dates": 303,
+      "validation_dates": 30,
+      "test_dates": 0,
+      "reserved_dates": 30,
+      "unused_dates": 0,
+      "path": "chronological/through-2026-08-validate-2026-09/split.json"
+    }
+  ]
+}

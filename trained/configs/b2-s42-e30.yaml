@@ -1,0 +1,126 @@
+ckpt_path: null
+config:
+- {}
+data:
+  batch_size: 32
+  cv_fold: 0
+  history_path: null
+  lag_days: 1
+  num_workers: 0
+  predict_path: null
+  retrieval_policy: R3
+  split_manifest: /Users/alessiobarletta/Documents/USI26-27/neuralWave/AET-Neural-Wave/delivery/configs/full-data-split.json
+  split_protocol: static
+  test_end: '2026-09-30'
+  test_start: '2026-08-01'
+  train_end: '2026-06-30'
+  train_path: /Users/alessiobarletta/Documents/USI26-27/neuralWave/AET-Neural-Wave/data/train_prices_15min.csv
+  training_window_stride_hours: null
+  val_end: '2026-07-31'
+  val_start: '2026-07-01'
+lr_scheduler: null
+model:
+  conditioning:
+    mechanism: adaln_zero
+    weekday: false
+    window_stats: true
+    zone: true
+  control:
+    encoder: transformer
+    feature_set: numerical11
+    head: signed
+  d_model: 64
+  dropout: 0.1
+  ff_dim: 128
+  integration:
+    architecture: BASE
+    encoder: none
+    injection: additive
+    registers: '4'
+    representation: correction
+  interpolation:
+    amplitude: 2.0
+    enabled: false
+  local_features:
+    enabled: false
+    radius: 1
+  lr: 0.001
+  n_heads: 4
+  n_layers: 2
+  normalization:
+    mode: per_day
+    scale_floor_fraction: 0.05
+  position:
+    absolute_time:
+      enabled: true
+      fusion: additive
+      harmonics:
+      - 1
+      - 2
+    base: 10000
+    type: rope
+  prediction:
+    mode: boundary_flux
+  teacher_forcing:
+    hour_probability: 0.0
+    sample_probability: 0.0
+  tokenization:
+    mode: hourly
+  weight_decay: 0.0001
+optimizer: null
+run:
+  early_stopping_min_delta: 0.0
+  early_stopping_patience: 30
+  entity: zhuraa-usi-universit-della-svizzera-italiana
+  experiment: full-data-refit
+  group: full-data-refit/b2-s42-e30
+  output_root: /Users/alessiobarletta/Documents/USI26-27/neuralWave/AET-Neural-Wave/delivery/trained
+  project: aet-project
+  run_id: b2-s42-e30
+  save_last: true
+  selection_metric: final_epoch
+  smoke_test: true
+seed_everything: 42
+trainer:
+  accelerator: auto
+  accumulate_grad_batches: 1
+  barebones: false
+  benchmark: null
+  callbacks: null
+  check_val_every_n_epoch: 1
+  default_root_dir: null
+  detect_anomaly: false
+  deterministic: true
+  devices: 1
+  enable_autolog_hparams: true
+  enable_checkpointing: null
+  enable_model_summary: null
+  enable_progress_bar: false
+  fast_dev_run: false
+  gradient_clip_algorithm: null
+  gradient_clip_val: null
+  inference_mode: true
+  limit_predict_batches: null
+  limit_test_batches: null
+  limit_train_batches: null
+  limit_val_batches: 0.0
+  log_every_n_steps: 10
+  logger: false
+  max_epochs: 30
+  max_steps: -1
+  max_time: null
+  min_epochs: null
+  min_steps: null
+  model_registry: null
+  num_nodes: 1
+  num_sanity_val_steps: 0
+  overfit_batches: 0.0
+  plugins: null
+  precision: null
+  profiler: null
+  reload_dataloaders_every_n_epochs: 0
+  strategy: auto
+  sync_batchnorm: false
+  use_distributed_sampler: true
+  val_check_interval: null
+weights_only: null

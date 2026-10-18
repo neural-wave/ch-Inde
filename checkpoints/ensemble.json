@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "seed": 42,
+  "trained_epochs": 30,
+  "weights": [
+    0.5,
+    0.5
+  ],
+  "training_date_count": 363,
+  "training_date_start": "2025-10-01",
+  "training_date_end": "2026-09-30",
+  "source_sha256": "2b9abcef67e6c4e39f8ba4300448b34b010099579eb9701798a2142ac1ebe38c",
+  "git_revision": "ee60e3c4515e24ab2319cebfe13dd1f532beeeea",
+  "reference_harvest_mae": 4.181181850843515,
+  "reference_interpretation": "Earlier held-out HARVEST score; not a score of this full-data refit",
+  "components": [
+    {
+      "label": "A0-base/R3-CNN",
+      "weight": 0.5,
+      "checkpoint": "a0-r3-cnn.ckpt",
+      "checkpoint_sha256": "cd194f0e062ba9fe13316d1305bf2d13edff4c5a40c8e1c3b171887b849340ce",
+      "gate": "a0-r3-cnn-gate.json",
+      "config": "../configs/a0-r3-cnn.yaml",
+      "config_sha256": "4c94bf2562344014fc444958e4caed17f93ed531d26fe2ed2db4ef287ca2da00"
+    },
+    {
+      "label": "B2-base/ORIGINAL",
+      "weight": 0.5,
+      "checkpoint": "b2-base.ckpt",
+      "checkpoint_sha256": "5cb29525d2cd406261cd2357f53c9b4604a976cf8d2ea22bb94da742827698b9",
+      "config": "../configs/b2-base.yaml",
+      "config_sha256": "486a4c860f96f26e8157e3059753f02093d94b2375304a1dc5345a0c225f2c9d"
+    }
+  ],
+  "split_manifest": "../configs/full-data-split.json",
+  "split_manifest_sha256": "0bad70a46b73407d928f1796f163b8af0eb4fb4b8bd0bb555dd1a002b4b614d2"
+}
