@@ -125,29 +125,27 @@ This has the same input and output checks but does not use historical context.
 
 ## Selected model and recorded scores
 
-The selected delivery recipe is `A0-R3-CNN + B2 Original`, fixed at 50/50. It
-was chosen from a one-seed fixed-weight grid using the prior HARVEST
-seasonal-transfer result: **4.181182 EUR/MWh** on October 2025. That run trained
-on November 2025--September 2026 for exactly 30 epochs and evaluated October
-once at epoch 30; October did not select a checkpoint or ensemble weight.
+The selected delivery recipe is `A0-R3-CNN + B2 Original`, with fixed 50/50
+weights. HARVEST favored this recipe, whereas HORIZON favored a local A0 plus
+global B2 retrieval choice. The final selection explicitly uses the HARVEST
+seasonal-transfer result: **4.181 EUR/MWh** on October 2025, a **19.31%**
+improvement over MAKIMA. Its HORIZON macro-month and pooled-date MAEs are
+**4.064** and **4.072 EUR/MWh**, respectively.
 
-The delivery checkpoints were subsequently refit from scratch with seed 42 for
-30 epochs on all 363 official dates (1 October 2025--30 September 2026),
-including October. Consequently, their full-data ensemble MAE of **3.3532
-EUR/MWh** is a training diagnostic, not a new holdout or generalization score.
+| Method | HORIZON MAE | HARVEST MAE |
+| --- | ---: | ---: |
+| Flat hourly repeat | 8.228 | 8.944 |
+| MAKIMA | 4.780 | 5.181 |
+| LightGBM | 4.213 | 4.487 |
+| XGBoost | 4.234 | 4.553 |
+| GBM average | 4.200 | 4.508 |
+| Selected `A0-R3-CNN + B2 Original` (50/50) | 4.064 macro-month / 4.072 pooled-date | 4.181 |
 
-| Evaluation | Ensemble MAE | Standalone MAKIMA | Flat hourly repeat |
-| --- | ---: | ---: | ---: |
-| Prior HARVEST selection run (October 2025) | 4.181182 | See note below | See note below |
-| Full-data refit, training dates | 3.3532 | 4.5169 | 7.5776 |
-
-All values are EUR/MWh and use the daily, equal-zone MAE: score each date-zone
-over 96 quarters, average dates within each zone, then average the four zones.
-The full-data run improved its training MAE over MAKIMA by 1.1637 EUR/MWh
-(25.76%). The project’s HARVEST context-study reference for the same October
-period reports standalone MAKIMA 5.181849 and flat 8.943973 EUR/MWh; it is a
-protocol reference, not a score of the full-data refit. MAKIMA here means the
-fixed amplitude-2, explicitly extrapolated, hour-centered baseline.
+All values are EUR/MWh. HORIZON values are macro-month means unless the
+pooled-date value is explicitly given. Scores use daily, equal-zone MAE: score
+each date-zone over 96 quarters, average dates within each zone, then average
+the four zones. MAKIMA is the fixed amplitude-2, explicitly extrapolated,
+hour-centered reference.
 
 ## Evaluation protocols
 
@@ -194,3 +192,24 @@ Each component refit writes `checkpoints/last.ckpt`, diagnostics, and, for A0,
 `gate.json`. The script prints each produced checkpoint hash alongside the
 hash recorded in `checkpoints/ensemble.json`; exact bytes can depend on the
 hardware and library stack.
+
+## Model history
+
+Era 2 established the validation and Transformer development path: a fixed
+July validation / August--September test split, weekly CV, and fixed-epoch
+checkpoint selection. Per-day normalization slightly outperformed global
+normalization, while weekday conditioning and sliding-window training did not
+help. Of six early architectures, the hourly four-output Transformer (`E2-B`)
+led July validation at 4.0492 MAE, although MAKIMA still outperformed all six
+neural models on the August--September test.
+
+Teacher forcing improved masked models, and a flat gate with local features
+improved the early neural variants. This work was consolidated into the shared
+20-fold MOSAIC, HARVEST, and HORIZON protocol used for subsequent comparisons.
+
+Later experiments evolved the Transformer into the A and B families, then
+tested historical context. CNN encoding led the A-family context models; the
+final retrieval recipe selects five same-zone, same-clock-hour observations
+within 28 days (`R3`). Fixed 50/50 A/B ensembles beat their individual
+components in the matched replication comparisons, leading to contextual
+`A0-R3-CNN + B2 Original` as the frozen delivery model.
