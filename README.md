@@ -88,8 +88,8 @@ predicted.
 
 ```sh
 python inference.py \
-  --hourly-input data/hourly_input.csv \
-  --history-input data/train_prices_15min.csv \
+  --hourly-input data/<your_hourly_input_data>.csv \
+  --history-input data/<your_train_prices_15min_data>.csv \
   --output data/predictions/ensemble.csv
 ```
 
@@ -116,7 +116,7 @@ Add `--model b2` to run only the B2 component:
 ```sh
 python inference.py \
   --model b2 \
-  --hourly-input data/hourly_input.csv \
+  --hourly-input data/<your_hourly_input_data>.csv \
   --checkpoint checkpoints/b2-base.ckpt \
   --output data/predictions/b2-only.csv
 ```
