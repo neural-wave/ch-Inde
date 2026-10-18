@@ -40,7 +40,7 @@ Use Python 3.12 or newer and `uv`. Run the following commands from the
 `delivery/` directory:
 
 ```sh
-uv sync --locked
+uv sync
 source .venv/bin/activate
 ```
 
